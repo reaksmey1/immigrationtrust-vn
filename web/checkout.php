@@ -11,7 +11,7 @@ else {
 	$transaction = new \Paystation\Transaction();
 	$transaction->transactionId = -1;
 	$transaction->hasError = true;
-	$transaction->errorMessage = "No amount/invoice specified.";
+	$transaction->errorMessage = "No amount / invoice specified.";
 }
 ?>
 <!doctype html>
