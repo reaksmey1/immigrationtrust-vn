@@ -19,8 +19,9 @@ $jsonResponse = [
 // example query: ?method=make_transaction&amount=10.50
 if ($method == 'make_transaction') {
 	$amount = $_REQUEST['amount'] * 100;
+	$invoice = $_REQUEST['invoice'];
 
-	$jsonResponse = $paystation->createTransaction($amount, 'sample_pay_here_transaction'); // Replace 'sample_pay_here_transaction' with your own merchant reference.
+	$jsonResponse = $paystation->createTransaction($amount, $invoice); // Replace 'sample_pay_here_transaction' with your own merchant reference.
 }
 // This is the endpoint used by the browser for polling a transaction's status/errorCode.
 // example: ?method=get_transaction&transaction_id=12345

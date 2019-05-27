@@ -1,17 +1,17 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 
-$amount = isset($_REQUEST['amount']) ? $_REQUEST['amount'] * 100 : false;
-$invoice = isset($_REQUEST['invoice']);
+$amount = $_REQUEST['amount'] ? $_REQUEST['amount'] * 100 : false;
+$invoice = $_REQUEST['invoice'];
 
-if ($amount) {
+if ($amount && $invoice) {
 	$transaction = $paystation->createTransaction($amount, $invoice); // Replace 'sample_checkout_transaction' with your own merchant reference.
 }
 else {
 	$transaction = new \Paystation\Transaction();
 	$transaction->transactionId = -1;
 	$transaction->hasError = true;
-	$transaction->errorMessage = "No amount specified.";
+	$transaction->errorMessage = "No amount/invoice specified.";
 }
 ?>
 <!doctype html>
