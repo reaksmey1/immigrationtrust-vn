@@ -7,28 +7,29 @@
 </head>
 <body>
 <div class="page">
-	<div class="paystation-fold"></div>
-	<h2 class="header">Immigration Trust Payment Page</h2>
 	<div class="content">
 		<div class="box center">
-			<p>Create a test transaction to see the payment form. <a href="https://www2.paystation.co.nz/for-developers/test-cards/" target="_blank" rel="nofollow">Test cards can be found here</a>.</p>
-
-			<form method="post" action="checkout.php">
-				<label>$&nbsp;<input type="tel" name="amount" id="payment_amount" placeholder="Amount" value="10"/></label>
-				<button type="submit" id="payment_button">Pay Here</button>
-				<button type="submit" id="checkout_button" class="secondary">Pay at Checkout</button>
-			</form>
-		</div>
-		<div class="box">
-			<div id="payment_wrapper" class="payment-wrapper"></div>
-		</div>
-		<div class="box center" id="payment-page-qr-code" style="display: none;">
-			Or use your phone.<br><br>
+      <h2>Make a Payment Online</h2>
+      <form method="post" action="checkout.php">
+        <ul class="form-style-1">
+            <li>
+              <label>Invoice Number <span class="required">*</span></label>
+              <input type="text" name="invoice" id="invoice_number" class="field-long" />
+            </li>
+            <li>
+              <label>Amount to Pay <span class="required">*</span></label>
+              <input type="tel" name="amount" id="payment_amount" class="field-long" />
+            </li>
+            <li>
+                <input type="submit" id="checkout_button" value="Proccess to Payment Page" />
+            </li>
+        </ul>
+        </form>
 		</div>
 	</div>
 	<div class="flex"></div>
-	<div class="footer">
-	</div>
+	<!-- <div class="footer">
+	</div> -->
 </div>
 
 <script>()=>{};let upToDateBrowserDetected=true;</script>
@@ -41,7 +42,8 @@
 	let _paymentFrame, _qrCode;
 	const _paymentFrameWrapper = document.getElementById('payment_wrapper');
 	const _paymentAmountInput = document.getElementById('payment_amount');
-	const _paymentAmountButton = document.getElementById('payment_button');
+  const _invoiceNumberInput = document.getElementById('invoice_number');
+	// const _paymentAmountButton = document.getElementById('payment_button');
 	const _checkoutButton = document.getElementById('checkout_button');
 	const _qrCodeWrapper = document.getElementById("payment-page-qr-code");
 	let _transactionComplete = false;
@@ -93,8 +95,9 @@
 		// You might want to handle these differently depending on the errorCode (transaction.errorCode)
 		_paymentFrameWrapper.innerHTML = '<h1>' + msg + '</h1>';
 		showQrCode(false);
-		_paymentAmountInput.disabled = false;
-		_paymentAmountButton.disabled = false;
+    _paymentAmountInput.disabled = false;
+    _invoiceNumberInput.disabled = false;
+		// _paymentAmountButton.disabled = false;
 		_checkoutButton.disabled = false;
 	}
 
@@ -134,7 +137,7 @@
 
 		e.preventDefault();
 		_paymentAmountInput.disabled = true;
-		_paymentAmountButton.disabled = true;
+		// _paymentAmountButton.disabled = true;
 		_checkoutButton.disabled = true;
 
 		// create the transaction, get the URL for iframe, show it to the user, begin polling the transaction to see when they have finished paying.
@@ -186,7 +189,7 @@
 	}
 
 	loadPreviousTransaction();
-	_paymentAmountButton.form.addEventListener('submit', payHere);
+	// _paymentAmountButton.form.addEventListener('submit', payHere);
 	_checkoutButton.addEventListener('click', payAtCheckout);
 	_paymentAmountInput.addEventListener('blur', function () {
 		validateAmount(this, parseFloat(this.value));

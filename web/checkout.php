@@ -2,9 +2,10 @@
 require_once __DIR__ . '/../src/init.php';
 
 $amount = isset($_REQUEST['amount']) ? $_REQUEST['amount'] * 100 : false;
+$invoice = isset($_REQUEST['invoice']);
 
 if ($amount) {
-	$transaction = $paystation->createTransaction($amount, 'sample_checkout_transaction'); // Replace 'sample_checkout_transaction' with your own merchant reference.
+	$transaction = $paystation->createTransaction($amount, $invoice); // Replace 'sample_checkout_transaction' with your own merchant reference.
 }
 else {
 	$transaction = new \Paystation\Transaction();
@@ -18,18 +19,13 @@ else {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Hosted Payment Demo</title>
+	<title>Immigration Trust Payment</title>
 	<link rel="stylesheet" type="text/css" href="css/paystation.css?1">
 </head>
 <body>
-<div class="paystation-fold"></div>
-<h2 class="header">Hosted Payment Demo</h2>
-
 <div class="content">
 	<div class="box">
-		<a href="./">back</a>
-		<br>
-		<br>
+		<br />
 		<div id="payment_wrapper" class="payment-wrapper">
 			<?= $transaction->hasError ? "<h1 style=\"color:red\">$transaction->errorMessage</h1>" : "<iframe class=\"paystation-payment-frame\" src=\"$transaction->digitalOrderUrl\"></iframe>" ?>
 		</div>
