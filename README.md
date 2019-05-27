@@ -16,3 +16,5 @@ The payment journey for a user looks something like this:
 The reason for sending them to our page to make the payment is because, without being PCI compliant, credit card data cannot pass through your website.
 
 [View our documentation here](https://docs.paystation.co.nz/#payment-page-customization) if you're framing or customising the payment page.
+
+/usr/bin/php -S localhost:80 

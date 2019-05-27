@@ -1,6 +1,6 @@
 {
-	"paystation_id": "616805",
-	"gateway_id": "admin",
-	"hmac_key": "IQ431TCxdXvxirtB",
-	"test_mode": true
+  "paystation_id": "616805",
+  "gateway_id": "PAYSTATION",
+  "hmac_key": "IQ431TCxdXvxirtB",
+  "test_mode": true
 }
