@@ -63,10 +63,12 @@ class API {
 	 * @param string $merchantReference
 	 * @return Transaction
 	 */
-	function createTransaction($amount, $merchantReference = '') {
+	function createTransaction($amount, $merchantReference, $email, $full_name = '') {
 		$txn = new Transaction();
 		$txn->amount = $amount;
-		$txn->merchantReference = $merchantReference;
+    $txn->merchantReference = $merchantReference;
+    $txn->email = $email;
+    $txn->full_name = $full_name;
 		$txn->testMode = $this->testMode;
 		$txn->paystationId = $this->paystationId;
 		$txn->gatewayId = $this->gatewayId;
@@ -84,11 +86,19 @@ class API {
 
 		if ($txn->merchantReference) {
 			$params['pstn_mr'] = $txn->merchantReference;
-		}
+    }
+    
+    if ($txn->email) {
+      $params['pstn_mc'] = $txn->email;
+    }
+
+    if ($txn->full_name) {
+      $params['pstn_mo'] = $txn->full_name;
+    }
 
 		if ($txn->testMode) {
 			$params['pstn_tm'] = 't';
-		}
+    }
 
 		$result = $this->post($this->apiURL, $params);
 		$json = json_decode($result, true);

@@ -3,15 +3,17 @@ require_once __DIR__ . '/../src/init.php';
 
 $amount = $_REQUEST['amount'] ? $_REQUEST['amount'] * 100 : false;
 $invoice = $_REQUEST['invoice'];
+$full_name = $_REQUEST['full_name'];
+$email = $_REQUEST['emailTxt'];
 
-if ($amount && $invoice) {
-	$transaction = $paystation->createTransaction($amount, $invoice); // Replace 'sample_checkout_transaction' with your own merchant reference.
+if ($amount && $invoice && $email) {
+	$transaction = $paystation->createTransaction($amount, $invoice, $email, $full_name); // Replace 'sample_checkout_transaction' with your own merchant reference.
 }
 else {
 	$transaction = new \Paystation\Transaction();
 	$transaction->transactionId = -1;
 	$transaction->hasError = true;
-	$transaction->errorMessage = "No amount / invoice specified.";
+	$transaction->errorMessage = "No amount / email / invoice specified.";
 }
 ?>
 <!doctype html>
@@ -33,7 +35,8 @@ else {
 </div>
 <script src="js/paystation.js"></script>
 <script>
-	const _paymentFrameWrapper = document.getElementById('payment_wrapper');
+  const _paymentFrameWrapper = document.getElementById('payment_wrapper');
+  const _email = '<?= $email ?>';
 	const _paymentFrame = _paymentFrameWrapper.firstElementChild;
 	const _transactionId = '<?= $transaction->transactionId ?>';
 
@@ -52,9 +55,16 @@ else {
 		// hasError is for all errors regardless if they come from paystation or us, which could happen before the transaction completes.
 		// errorCode is a paystation response which is set after a transaction is complete. A negative error code means no error code has been returned.
 		if (transaction && (transaction.errorCode > -1 || transaction.hasError)) {
+			if (transaction.errorCode == 0) {
+        sendConfirmationEmail();
+      }
 			onTransactionComplete(transaction);
 		}
-	}
+  }
+  
+  function sendConfirmationEmail() {
+    console.log('email');
+  }
 
 	// Remove the iframe and stop polling the transaction details. Show a response to the user.
 	function onTransactionComplete(transaction) {
