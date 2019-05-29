@@ -39,6 +39,8 @@ else {
   const _paymentFrameWrapper = document.getElementById('payment_wrapper');
   const _fullname = '<?= $full_name ?>';
   const _email = '<?= $email ?>';
+  const _payment_amount = '<?= $amount ?>';
+  const _invoice_number = '<?= $invoice ?>';
 	const _paymentFrame = _paymentFrameWrapper.firstElementChild;
 	const _transactionId = '<?= $transaction->transactionId ?>';
 
@@ -68,6 +70,8 @@ else {
     var data = {
         'full_name': _fullname,
         'receive_email': _email,
+        'payment_amount': _payment_amount,
+        'invoice_number': _invoice_number
     };
     // POST data to the php file
     $.ajax({ 

@@ -1,24 +1,28 @@
 <?php
   require __DIR__ . '/../vendor/autoload.php';
 
-  $receive_email = $_POST['receive_email'];
+  $payment_amount = $_POST['payment_amount'];
   $full_name = $_POST['full_name'];
+  $invoice_number = $_POST['invoice_number'];
 
   $email = new \SendGrid\Mail\Mail(); 
   $email->setFrom("info@immigrationtrust.co.nz", "Immigration Trust");
   $email->setSubject("Confirmation of Payment");
   $email->addTo($receive_email, $full_name);
-  $email->addCc("chea.reaksmey@gmail.com", "Ivy");
+  $email->addCc("info@immigrationtrust.co.nz", "Ivy");
   $email->addDynamicTemplateData(
     new \SendGrid\Mail\Substitution("name", $full_name)
   );
   $email->addDynamicTemplateData(
-    new \SendGrid\Mail\Substitution("email", $receive_email)
+    new \SendGrid\Mail\Substitution("amount", $payment_amount)
+  );
+  $email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("invoice", $invoice_number)
   );
   $email->setTemplateId(
-    new \SendGrid\Mail\TemplateId("d-335893beeb7e4f60a426bc34dadaf73e")
+    new \SendGrid\Mail\TemplateId("d-016a8afdcd4a48dca9c87c3d750d3f30")
   );
-  $sendgrid = new \SendGrid("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");
+  $sendgrid = new \SendGrid("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");
   try {
       $response = $sendgrid->send($email);
       print $response->statusCode() . "\n";
