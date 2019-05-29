@@ -76,20 +76,6 @@ else {
         data: data,
         type: 'POST',
         success: function (data) {
-      // For Notification
-          echo "success";
-            // document.getElementById("sendMailForm").reset();
-            // var $alertDiv = $(".mailResponse");
-            // $alertDiv.show();
-            // $alertDiv.find('.alert').removeClass('alert-danger alert-success');
-            // $alertDiv.find('.mailResponseText').text("");
-            // if(data.error){
-            //     $alertDiv.find('.alert').addClass('alert-danger');
-            //     $alertDiv.find('.mailResponseText').text(data.message);
-            // }else{
-            //     $alertDiv.find('.alert').addClass('alert-success');
-            //     $alertDiv.find('.mailResponseText').text(data.message);
-            // }
         }
     });
   }
