@@ -4,6 +4,7 @@
   $payment_amount = $_POST['payment_amount'];
   $full_name = $_POST['full_name'];
   $invoice_number = $_POST['invoice_number'];
+  $receive_email = $_POST['receive_email'];
 
   $email = new \SendGrid\Mail\Mail(); 
   $email->setFrom("info@immigrationtrust.co.nz", "Immigration Trust");
@@ -24,7 +25,7 @@
   );
   $sendgrid = new \SendGrid("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");
   try {
-      $response = $sendgrid->send($email);
+      $response = $sendgrid->send($receive_email);
       print $response->statusCode() . "\n";
       print_r($response->headers());
       print $response->body() . "\n";
