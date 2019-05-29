@@ -65,10 +65,8 @@ else {
   
   function sendConfirmationEmail() {
     var data = {
-        'name': "smey",
-        'email': "chea.reaksmey@gmail.com",
-        'contact': "232312",
-        'message' : "testing"
+        'full_name': "smey",
+        'email': "chea.reaksmey@gmail.com"
     };
     // POST data to the php file
     $.ajax({ 

@@ -1,13 +1,22 @@
 <?php
   require __DIR__ . '/../vendor/autoload.php';
 
+  $receive_email = $_POST['email'];
+  $full_name = $_POST['full_name'];
+
   $email = new \SendGrid\Mail\Mail(); 
-  $email->setFrom("chea.reaksmey@gmail.com", "Example User");
-  $email->setSubject("Sending with Twilio SendGrid is Fun");
-  $email->addTo("chea.reaksmey@gmail.com", "Example User");
-  $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-  $email->addContent(
-      "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
+  $email->setFrom("info@immigrationtrust.co.nz", "Immigration Trust");
+  $email->setSubject("Confirmation of Payment");
+  $email->addTo($receive_email, $full_name);
+  $email->addCc("chea.reaksmey@gmail.com", "Ivy");
+  $email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("name", $full_name)
+  );
+  $email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("email", $receive_email)
+  );
+  $email->setTemplateId(
+    new \SendGrid\Mail\TemplateId("d-335893beeb7e4f60a426bc34dadaf73e")
   );
   $sendgrid = new \SendGrid("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");
   try {
