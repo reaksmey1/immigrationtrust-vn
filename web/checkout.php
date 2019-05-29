@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../src/init.php';
 
 $amount = $_REQUEST['amount'] ? $_REQUEST['amount'] * 100 : false;
+$fix_amount = $_REQUEST['amount'];
 $invoice = $_REQUEST['invoice'];
 $full_name = $_REQUEST['full_name'];
 $email = $_REQUEST['emailTxt'];
@@ -39,7 +40,7 @@ else {
   const _paymentFrameWrapper = document.getElementById('payment_wrapper');
   const _fullname = '<?= $full_name ?>';
   const _email = '<?= $email ?>';
-  const _payment_amount = '<?= $amount ?>';
+  const _payment_amount = '<?= $fix_amount ?>';
   const _invoice_number = '<?= $invoice ?>';
 	const _paymentFrame = _paymentFrameWrapper.firstElementChild;
 	const _transactionId = '<?= $transaction->transactionId ?>';
