@@ -1,7 +1,7 @@
 <?php
   require __DIR__ . '/../vendor/autoload.php';
 
-  $receive_email = $_POST['email'];
+  $receive_email = $_POST['receive_email'];
   $full_name = $_POST['full_name'];
 
   $email = new \SendGrid\Mail\Mail(); 

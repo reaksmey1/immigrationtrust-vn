@@ -37,6 +37,7 @@ else {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
   const _paymentFrameWrapper = document.getElementById('payment_wrapper');
+  const _fullname = '<?= $full_name ?>';
   const _email = '<?= $email ?>';
 	const _paymentFrame = _paymentFrameWrapper.firstElementChild;
 	const _transactionId = '<?= $transaction->transactionId ?>';
@@ -65,8 +66,8 @@ else {
   
   function sendConfirmationEmail() {
     var data = {
-        'full_name': "smey",
-        'email': "chea.reaksmey@gmail.com"
+        'full_name': _fullname,
+        'receive_email': _email,
     };
     // POST data to the php file
     $.ajax({ 
