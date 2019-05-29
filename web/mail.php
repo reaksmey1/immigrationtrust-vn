@@ -25,7 +25,7 @@
   );
   $sendgrid = new \SendGrid("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");
   try {
-      $response = $sendgrid->send($receive_email);
+      $response = $sendgrid->send($email);
       print $response->statusCode() . "\n";
       print_r($response->headers());
       print $response->body() . "\n";
