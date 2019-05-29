@@ -34,6 +34,7 @@ else {
 	</div>
 </div>
 <script src="js/paystation.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
   const _paymentFrameWrapper = document.getElementById('payment_wrapper');
   const _email = '<?= $email ?>';
@@ -63,7 +64,33 @@ else {
   }
   
   function sendConfirmationEmail() {
-    console.log('email');
+    var data = {
+        'name': 'smey',
+        'email': 'chea.reaksmey@gmail.com',
+        'contact': '232312',
+        'message' : 'testing'
+    };
+    // POST data to the php file
+    $.ajax({ 
+        url: 'mail.php', 
+        data: data,
+        type: 'POST',
+        success: function (data) {
+			// For Notification
+            document.getElementById("sendMailForm").reset();
+            var $alertDiv = $(".mailResponse");
+            $alertDiv.show();
+            $alertDiv.find('.alert').removeClass('alert-danger alert-success');
+            $alertDiv.find('.mailResponseText').text("");
+            if(data.error){
+                $alertDiv.find('.alert').addClass('alert-danger');
+                $alertDiv.find('.mailResponseText').text(data.message);
+            }else{
+                $alertDiv.find('.alert').addClass('alert-success');
+                $alertDiv.find('.mailResponseText').text(data.message);
+            }
+        }
+    });
   }
 
 	// Remove the iframe and stop polling the transaction details. Show a response to the user.
