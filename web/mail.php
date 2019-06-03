@@ -5,6 +5,7 @@
   $full_name = $_POST['full_name'];
   $invoice_number = $_POST['invoice_number'];
   $receive_email = $_POST['receive_email'];
+  $transaction_number = $_POST['transaction_number'];
 
   $email = new \SendGrid\Mail\Mail(); 
   $email->setFrom("info@immigrationtrust.co.nz", "Immigration Trust");
@@ -19,6 +20,9 @@
   );
   $email->addDynamicTemplateData(
     new \SendGrid\Mail\Substitution("invoice", $invoice_number)
+  );
+  $email->addDynamicTemplateData(
+    new \SendGrid\Mail\Substitution("transaction", $transaction_number)
   );
   $email->setTemplateId(
     new \SendGrid\Mail\TemplateId("d-016a8afdcd4a48dca9c87c3d750d3f30")

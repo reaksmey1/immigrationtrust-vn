@@ -72,7 +72,8 @@ else {
         'full_name': _fullname,
         'receive_email': _email,
         'payment_amount': _payment_amount,
-        'invoice_number': _invoice_number
+        'invoice_number': _invoice_number,
+        'transaction_number': _transactionId,
     };
     // POST data to the php file
     $.ajax({ 
@@ -91,7 +92,11 @@ else {
 
 		// Display the outcome to the user i.e. "Transaction successful" or "Insufficient funds"
 		// You might want to handle these differently depending on the errorCode (transaction.errorCode)
-		_paymentFrameWrapper.innerHTML = '<h1>' + transaction.errorMessage + '</h1>';
+		_paymentFrameWrapper.innerHTML = '<h2>' + transaction.errorMessage + '</h2>';
+    if (transaction.errorCode == 0) {
+      _paymentFrameWrapper.innerHTML += '<br/><br/><h4>Confirmation Email</h4><br/>';
+      _paymentFrameWrapper.innerHTML += '<p>​Please make sure you enter <u>the correct email address</u> as you will receive a confirmation email when your transaction is successful.  ​If you do not receive the email, please check your <u>spam folder</u>.</p>';
+    }
 	}
 </script>
 </body>
