@@ -95,7 +95,7 @@ else {
 		_paymentFrameWrapper.innerHTML = '<h2>' + transaction.errorMessage + '</h2>';
     if (transaction.errorCode == 0) {
       _paymentFrameWrapper.innerHTML += '<br/><br/><h4>Confirmation Email</h4><br/>';
-      _paymentFrameWrapper.innerHTML += '<p>​Please make sure you enter <u>the correct email address</u> as you will receive a confirmation email when your transaction is successful.  ​If you do not receive the email, please check your <u>spam folder</u>.</p>';
+      _paymentFrameWrapper.innerHTML += '<p>​Please check your email to see whether you received the confirmation email. If you do not receive the email, please check your spam folder.</p>';
     }
 	}
 </script>
