@@ -11,7 +11,7 @@
   $email->setFrom("simon@educationtrust.co.nz", "Education Trust");
   $email->setSubject("Confirmation of Payment");
   $email->addTo($receive_email, $full_name);
-  $email->addCc("simon@immigrationtrust.co.nz", "Simon");
+  $email->addCc("chea.reaksmey@gmail.com", "Simon");
   $email->addDynamicTemplateData(
     new \SendGrid\Mail\Substitution("name", $full_name)
   );
